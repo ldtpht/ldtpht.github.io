@@ -21,7 +21,7 @@ layout: default
             {% endfor %}
         </div>
         {% endif %}
-        <a class="post-link" href="{{ prepend: site.baseurl }}">
+        <a class="post-link" href="{{ post.url|prepend: site.baseurl }}">
             <h2>{{ post.title }}</h2>
         </a>
         <span class="category"><a href="#">{{ post.category }}</a></span>
