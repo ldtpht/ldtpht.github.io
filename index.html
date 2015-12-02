@@ -1,23 +1,50 @@
 ---
 layout: default
 ---
-
-<div class="home">
-
-  <h1 class="page-heading">Posts</h1>
-
-  <ul class="post-list">
-    {% for post in site.posts %}
-      <li>
-        <span class="post-meta">{{ post.date | date: "%b %-d, %Y" }}</span>
-
-        <h2>
-          <a class="post-link" href="{{ post.url | prepend: site.baseurl }}">{{ post.title }}</a>
-        </h2>
-      </li>
+<div class="post-count">
+    <span>{{ site.posts.size }} posts</span>
+</div>
+<div class="post-list">
+    {% for post in paginator.posts %}
+    <div class="post-item">
+        {% if post.tags %}
+        <div class="tag-list">
+            {% for tag in post.tags %}
+                <span class="tag-item">
+                    <a href="#">
+                        {{ tag }}
+                    </a>
+                </span>
+                {% if forloop.last == false %}
+                    <span>,</span>
+                {% endif %}
+            {% endfor %}
+        </div>
+        {% endif %}
+        <a class="post-link" href="{{ prepend: site.baseurl }}">
+            <h2>{{ post.title }}</h2>
+        </a>
+        <span class="category"><a href="#">{{ post.category }}</a></span>
+        {% if post.author %}
+            <span>by</span>
+            <span class="author"><a class="#">{{ post.author }}</a></span>
+            <span>|<span>
+        {% endif %}
+        <span>{{ post.date | date: "%d/%m/%y - %H:%M" }}<span>
+        {% if post.description %}
+            <span>{{ post.description }}</span>
+        {% endif %}
+    </div>
     {% endfor %}
-  </ul>
-
-  <p class="rss-subscribe">subscribe <a href="{{ "/feed.xml" | prepend: site.baseurl }}">via RSS</a></p>
-
+    <div class="pagination">
+    {% if paginator.previous_page %}
+        <a href="{{ paginator.previous_page_path  }}" class="previous">Previous</a>
+    {% else %}
+    {% endif %}
+        <span class="page_number ">Page: {{ paginator.page  }} of {{ paginator.total_pages  }}</span>
+    {% if paginator.next_page %}
+        <a href="{{ paginator.next_page_path  }}" class="next">Next</a>
+    {% else %}
+    {% endif %}
+    </div>
 </div>

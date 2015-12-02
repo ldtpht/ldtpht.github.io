@@ -1,0 +1,21 @@
+<div class="sidebar">
+    <a href="{{ site.baseurl }}">
+        {{ site.title }}
+    </a>
+    {% if site.categories.size > 0 %}
+        <h2>Categories</h2>
+        <ul class="categories">
+    {% for category in site.categories %}
+        <li>
+            <a href="#">{{ category[0] }}</a>
+        </li>
+    {% endfor %}
+        </ul>
+    {% endif %}
+    <p class="rss-subscribe">
+        subscribe
+        <a href="{{ "/feed.xml" | prepend: site.baseurl }}">
+        via RSS
+        </a>
+    </p>
+</div>
